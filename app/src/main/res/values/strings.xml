@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">MemoGame</string>
+
+    <string-array name="Collections">
+        <item>animal</item>
+
+        <item>space</item>
+    </string-array>
+
+    <string-array name="CollectionsTitle">
+        <item>Animals</item>
+        <item>Space</item>
+    </string-array>
+
+    <string-array name="Color">
+        <item>#000000</item>
+        <item>#FFF</item>
+    </string-array>
+
+    <string-array name="ColorTitle">
+        <item>Black</item>
+        <item>White</item>
+    </string-array>
 </resources>

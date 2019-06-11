@@ -21,14 +21,14 @@ public class GridAdapter extends BaseAdapter {
     private enum Status{CELL_OPEN, CELL_CLOSE, CELL_DELETE}
     private ArrayList<Status> arrStatus;
 
-    public GridAdapter(Context context, int cols, int rows){
+    public GridAdapter(Context context, int cols, int rows, String pictureCollection){
         mContext = context;
         mCols = cols;
         mRows = rows;
         arrPict = new ArrayList<String>();
         arrStatus = new ArrayList<Status>();
 
-        PictureCollection = "animal";
+        PictureCollection = pictureCollection;
         mRes = mContext.getResources();
 
         makePictArray();
@@ -68,12 +68,16 @@ public class GridAdapter extends BaseAdapter {
         return;
     }
 
-    public void openCell(int position){
+    public boolean openCell(int position){
+        if (arrStatus.get(position) == Status.CELL_DELETE ||
+                arrStatus.get(position) == Status.CELL_OPEN)
+            return false;
+
         if (arrStatus.get(position) != Status.CELL_DELETE)
             arrStatus.set(position, Status.CELL_OPEN);
 
         notifyDataSetChanged();
-        return;
+        return true;
     }
 
     public boolean checkGameOver(){
