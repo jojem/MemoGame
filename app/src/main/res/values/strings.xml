@@ -3,22 +3,41 @@
 
     <string-array name="Collections">
         <item>animal</item>
-
+        <item>coctail</item>
+        <item>desert</item>
+        <item>ferm</item>
+        <item>ghost</item>
         <item>space</item>
     </string-array>
 
     <string-array name="CollectionsTitle">
         <item>Animals</item>
+        <item>Coctails</item>
+        <item>Deserts</item>
+        <item>Ferm</item>
+        <item>Ghosts</item>
         <item>Space</item>
     </string-array>
 
     <string-array name="Color">
         <item>#000000</item>
-        <item>#FFF</item>
+        <item>#2C2C2C</item>
+        <item>#ffffff</item>
+        <item>#FFCFE2</item>
+        <item>#00746A</item>
+        <item>#D38BF5E0</item>
+        <item>#EEF7FCB6</item>
+        <item>#C9C63C</item>
     </string-array>
 
     <string-array name="ColorTitle">
         <item>Black</item>
+        <item>Dark</item>
         <item>White</item>
+        <item>Pink</item>
+        <item>Blue</item>
+        <item>Light Blue</item>
+        <item>Light Lemon</item>
+        <item>Lemon</item>
     </string-array>
 </resources>

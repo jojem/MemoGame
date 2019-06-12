@@ -1,5 +1,7 @@
 package com.example.memogame;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -18,9 +20,12 @@ public class Settings extends PreferenceActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new MyPreferenceFragment())
-                .commit();
+
+        addPreferencesFromResource(R.xml.settings);
+
+        collection = (ListPreference) this.findPreference("PictureCollection");
+        color = (ListPreference) this.findPreference("BackgroundColor");
+
 
         // устанавливаем слушатель
         collection.setOnPreferenceChangeListener(this);
@@ -33,22 +38,8 @@ public class Settings extends PreferenceActivity implements
         // получаем списки значений для каждой настройки
         pictValue = collection.getEntries();
         colValue = color.getEntries();
-
     }
 
-    public static class MyPreferenceFragment extends PreferenceFragment
-    {
-        @Override
-        public void onCreate(final Bundle savedInstanceState)
-        {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.settings);
-
-            collection = (ListPreference)this.findPreference("PictureCollection");
-            color = (ListPreference)this.findPreference("BackgroundColor");
-
-        }
-    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue)

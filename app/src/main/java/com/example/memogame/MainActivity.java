@@ -1,9 +1,12 @@
 package com.example.memogame;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -71,21 +74,54 @@ public class MainActivity extends AppCompatActivity {
                 if (mAdapter.checkGameOver()){
 
                     mTimeScreen.stop();
-                    String time = mTimeScreen.getText().toString();
-                    String TextToast = "You win! \nMade moves: " +
-                            StepCount.toString() + "\nTime: " + time;
-                    Toast.makeText(getApplicationContext(),
-                            TextToast,
-                            Toast.LENGTH_LONG).show();
+                    ShowGameOver();
 
                 }
             }
         });
+
+
     }
 
-    public void onSettingsClick(View view){
-        Intent intent = new Intent(getApplicationContext(), Settings.class);
-        startActivity(intent);
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation ==  Configuration.ORIENTATION_LANDSCAPE)
+            mGrid.setNumColumns(9);
+        if (newConfig.orientation ==  Configuration.ORIENTATION_PORTRAIT)
+            mGrid.setNumColumns(6);
+    }
 
+    private void ShowGameOver(){
+
+        String time = mTimeScreen.getText().toString();
+
+        // Читаем файл с рекордами
+        RecordAdapter ra = new RecordAdapter (this);
+        // Добавляем новые значения
+        ra.addPoint(StepCount);
+        ra.addTime(time);
+        // Записываем рекорды в файл
+        ra.WriteRecords();
+
+
+        // Диалоговое окно
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+
+        // Заголовок и текст
+        alertbox.setTitle("Congrats!");
+        String TextToast = "Game over, you win! \nMade moves: "
+                + StepCount.toString() + "\nTime: " + time;
+        alertbox.setMessage(TextToast);
+
+        // Добавляем кнопку
+        alertbox.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                // закрываем текущюю Activity
+                finish();
+            }
+        });
+        // показываем окно
+        alertbox.show();
     }
 }
